@@ -28,8 +28,8 @@ class Item(db.Model):
   song_id = db.Column(db.Integer, db.ForeignKey('song.id'))
   playlist_id = db.Column(db.Integer, db.ForeignKey('playlist.id'))
   
-  def __repr__(self):
-    return 'Playlist: {}\nSong: {}'.format(self.playlist_id, self.song_id)
+  # def __repr__(self):
+  #   return '{}: {}'.format(self.playlist_id, self.song_id)
 
 
 #create the Playlist model here + add a nice representation method
