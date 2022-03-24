@@ -40,6 +40,12 @@ body {
   color: #333;
 }
 
+/* Form styling */
+.formwrapper {
+  /* padding: 10px; */
+  margin-left: 6%;
+}
+
 /* Table styling */
 table {
   box-sizing: border-box;

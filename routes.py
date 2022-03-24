@@ -64,6 +64,8 @@ def add_item(user_id, song_id, playlist_id):
 def remove_item(user_id, item_id):
   #from the Item model, fetch the item with primary key item_id to be deleted
   delete_item = Item.query.get(item_id)
+  num_of_added = Song.query.get(delete_item.song_id)
+  num_of_added.n -= 1
   #using db.session delete the item
   db.session.delete(delete_item)
   #commit the deletion
@@ -76,7 +78,7 @@ def remove_item(user_id, item_id):
 def dashboard():
   form = SongForm()
   if request.method == 'POST' and form.validate():
-    new_song = Song(artist = form.artist.data, title = form.title.data, n = 1)
+    new_song = Song(artist = form.artist.data, title = form.title.data, n = 0)
     #add it to the database
     db.session.add(new_song)
     #commit to the database
@@ -84,6 +86,6 @@ def dashboard():
     return redirect(url_for('dashboard'))
   else:
       flash(form.errors)
-  unpopular_songs = Song.query.order_by(Song.n).limit(3).all()  #add the ordering query here
-  songs = Song.query.all()
-  return render_template('dashboard.html', songs = songs, unpopular_songs = unpopular_songs, form = form)
+  song_popularity = Song.query.order_by(Song.n.desc()).all()  #add the ordering query here
+  songs = Song.query.order_by(Song.artist).all()
+  return render_template('dashboard.html', songs = songs, song_popularity = song_popularity, form = form)

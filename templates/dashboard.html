@@ -25,15 +25,15 @@
   <div class="column">
     <table>
       <tr>
-        <th class='table header' colspan="2">Unpopular Songs</th>
+        <th class='table header' colspan="2">Popularity</th>
       </tr>
       <tr>
         <th>Song</th>
         <th>No. of Adds</th>
       </tr>
-      {% for song in unpopular_songs %}
+      {% for song in song_popularity %}
       <tr>
-        <td>{{ song.title }} - {{ song.artist }}</td>
+        <td><em>{{ song.title }}</em><br>{{ song.artist }}</td>
         <td>{{ song.n }}</td>
       </tr>
       {% endfor %}
@@ -42,14 +42,9 @@
 </div>
 
 
-
-
-
-
-
 <!-- Add song form -->
+<h2 class="title">Add new songs:</h2>
 <div class="formwrapper">
-  <h2 class="title">Add new songs:</h2>
   <form action="" method="post" novalidate>
   {{ form.hidden_tag() }}
         <p>
