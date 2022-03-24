@@ -1,4 +1,4 @@
-from tkinter import NONE
+
 from flask import Flask
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -84,6 +84,6 @@ def dashboard():
     return redirect(url_for('dashboard'))
   else:
       flash(form.errors)
-  unpopular_songs = Song.query.order_by(Song.n).all()  #add the ordering query here
+  unpopular_songs = Song.query.order_by(Song.n).limit(3).all()  #add the ordering query here
   songs = Song.query.all()
   return render_template('dashboard.html', songs = songs, unpopular_songs = unpopular_songs, form = form)
